@@ -1,10 +1,16 @@
 const express = require('express');
 const mongoose= require('mongoose');
+const bodyParser = require('body-parser');
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
+const app = express();
+
+// Body Parser Middleware
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 
 //DB Config
@@ -16,7 +22,6 @@ mongoose.
     then(() => console.log('MongoDB is up and running')).
     catch(err => console.log(err));
 
-const app = express();
 
 //User routes
 app.use('/api/users', users);
